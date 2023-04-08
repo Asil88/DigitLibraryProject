@@ -20,7 +20,7 @@ public class SecurityConfiguration {
 
     CustomerUserDetailsService customerUserDetailsService;
 
-    /*private static final String[] AUTH_WHITELIST = {
+    private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",
@@ -30,7 +30,6 @@ public class SecurityConfiguration {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().antMatchers(AUTH_WHITELIST);
     }
-*/
     @Autowired
     public SecurityConfiguration(CustomerUserDetailsService customerUserDetailsService) {
         this.customerUserDetailsService = customerUserDetailsService;

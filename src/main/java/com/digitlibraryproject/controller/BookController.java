@@ -4,19 +4,24 @@ import com.digitlibraryproject.domain.Book;
 import com.digitlibraryproject.domain.request.BookRequest;
 import com.digitlibraryproject.exception.ResourceNotFoundException;
 import com.digitlibraryproject.service.BookService;
+import com.digitlibraryproject.service.DropboxService;
 import com.digitlibraryproject.util.AvailabilityEnum;
 import com.digitlibraryproject.util.GenreEnum;
+import com.dropbox.core.DbxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,6 +35,8 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @Autowired
+    private DropboxService dropboxService;
 
 
     @GetMapping("/findAll")
@@ -108,6 +115,24 @@ public class BookController {
         }
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        try {
+            dropboxService.uploadFile(file);
+            return ResponseEntity.ok().body("File has been uploaded to Dropbox!");
+        } catch (IOException | DbxException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Dropbox!");
+        }
+    }
 
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadFile(@RequestParam("file") String fileName) {
+        try {
+            byte[] file = dropboxService.downloadFile(fileName);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").body(file);
+        } catch (IOException | DbxException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
 

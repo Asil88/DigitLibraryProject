@@ -12,4 +12,13 @@ public class OrderRequest {
     private int userId;
     private int bookId;
 
+    public OrderRequest() {
+    }
+
+    public OrderRequest(StatusEnum status, PaymentMethodEnum paymentMethod, int userId, int bookId) {
+        this.status = status;
+        this.paymentMethod = paymentMethod;
+        this.userId = userId;
+        this.bookId = bookId;
+    }
 }

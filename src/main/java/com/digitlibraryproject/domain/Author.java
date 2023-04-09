@@ -26,13 +26,13 @@ public class Author {
     @NotBlank(message = "Name cannot be blank")
     @Column(name = "name")
     private String name;
-
+    @NotBlank
     @Column(name = "surname")
     private String surname;
-
+    @NotBlank
     @Column(name = "biography")
     private String biography;
-
+    @NotBlank
     @Column(name = "description")
     private String description;
 

@@ -14,4 +14,18 @@ public class BookRequest {
     private AvailabilityEnum availability;
     private int authorId;
     private String fileName;
+
+    public BookRequest() {
+    }
+
+    public BookRequest(String title, Double price, GenreEnum genre, String series, String annotation, AvailabilityEnum availability, int authorId, String fileName) {
+        this.title = title;
+        this.price = price;
+        this.genre = genre;
+        this.series = series;
+        this.annotation = annotation;
+        this.availability = availability;
+        this.authorId = authorId;
+        this.fileName = fileName;
+    }
 }

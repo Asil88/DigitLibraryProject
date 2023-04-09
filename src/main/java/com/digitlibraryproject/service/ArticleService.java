@@ -38,7 +38,7 @@ public class ArticleService {
         articleRepository.save(article);
     }
 
-    public void updateAuthorById(Article article) {
+    public void updateArticleById(Article article) {
         articleRepository.saveAndFlush(article);
     }
 

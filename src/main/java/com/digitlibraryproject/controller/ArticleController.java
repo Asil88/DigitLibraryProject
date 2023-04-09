@@ -68,7 +68,7 @@ public class ArticleController {
             }
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        articleService.updateAuthorById(article);
+        articleService.updateArticleById(article);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

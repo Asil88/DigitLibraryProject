@@ -4,9 +4,19 @@ import com.digitlibraryproject.util.PaymentMethodEnum;
 import com.digitlibraryproject.util.StatusEnum;
 import lombok.Data;
 
-import javax.persistence.*;
+
 import javax.validation.constraints.NotNull;
+import javax.persistence.Enumerated;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.GenerationType;
 import java.sql.Timestamp;
+
 
 @Data
 @Entity
@@ -24,7 +34,7 @@ public class Order {
     @Column(name = "date_created")
     private Timestamp dateCreated;
 
-    @Column(name = "payment_method",nullable = false)
+    @Column(name = "payment_method", nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentMethodEnum paymentMethod;
 
@@ -36,4 +46,15 @@ public class Order {
     @Column(name = "book_id")
     private int bookId;
 
+    public Order() {
+    }
+
+    public Order(int id, StatusEnum status, Timestamp dateCreated, PaymentMethodEnum paymentMethod, int userId, int bookId) {
+        this.id = id;
+        this.status = status;
+        this.dateCreated = dateCreated;
+        this.paymentMethod = paymentMethod;
+        this.userId = userId;
+        this.bookId = bookId;
+    }
 }

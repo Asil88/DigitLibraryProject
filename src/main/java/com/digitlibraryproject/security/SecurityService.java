@@ -47,29 +47,25 @@ public class SecurityService {
 
     @Transactional
     public boolean updateUserToAdmin(int id) {
-        if (roleRepository.updateUserToAdmin(id)>0){
+        if (roleRepository.updateUserToAdmin(id) > 0) {
             return true;
         }
-         throw new  UsernameNotFoundException("USER_NOT_FOUND");
+        throw new UsernameNotFoundException("USER_NOT_FOUND");
     }
 
     @Transactional
     public boolean updateAdminToUser(int id) {
-        if (roleRepository.updateAdminToUser(id)>0){
+        if (roleRepository.updateAdminToUser(id) > 0) {
             return true;
         }
-        throw new  UsernameNotFoundException("ADMIN_NOT_FOUND");
+        throw new UsernameNotFoundException("ADMIN_NOT_FOUND");
     }
 
     @Transactional
     public boolean updateUserToSubscriber(int id) {
-        if (roleRepository.updateUserToSubscriber(id)>0){
+        if (roleRepository.updateUserToSubscriber(id) > 0) {
             return true;
         }
-        throw new  UsernameNotFoundException("USER_NOT_FOUND");
+        throw new UsernameNotFoundException("USER_NOT_FOUND");
     }
-
-
-
-
 }

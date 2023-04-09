@@ -4,8 +4,21 @@ import com.digitlibraryproject.util.AvailabilityEnum;
 import com.digitlibraryproject.util.GenreEnum;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.persistence.Enumerated;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.GenerationType;
+
 
 @Data
 @Entity
@@ -50,4 +63,18 @@ public class Book {
     @Column(name = "file_name")
     private String fileName;
 
+    public Book() {
+    }
+
+    public Book(int id, String title, Double price, GenreEnum genre, String series, String annotation, AvailabilityEnum availability, int authorId, String fileName) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.genre = genre;
+        this.series = series;
+        this.annotation = annotation;
+        this.availability = availability;
+        this.authorId = authorId;
+        this.fileName = fileName;
+    }
 }

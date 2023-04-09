@@ -14,7 +14,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -68,7 +75,7 @@ public class OrderController {
     }
 
     @PutMapping("/status/{id}/{status}")
-    public ResponseEntity<HttpStatus> updateOrderStatus(@PathVariable int id,@PathVariable StatusEnum status) {
+    public ResponseEntity<HttpStatus> updateOrderStatus(@PathVariable int id, @PathVariable StatusEnum status) {
         boolean updateOrderStatus = orderService.updateOrderStatus(id, status);
         if (updateOrderStatus) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -78,7 +85,7 @@ public class OrderController {
     }
 
     @PutMapping("/paymentMethod/{id}/{paymentMethod}")
-    public ResponseEntity<HttpStatus> updateOrderPaymentMethod(@PathVariable int id,@PathVariable PaymentMethodEnum paymentMethod) {
+    public ResponseEntity<HttpStatus> updateOrderPaymentMethod(@PathVariable int id, @PathVariable PaymentMethodEnum paymentMethod) {
         boolean updateOrderPaymentMethod = orderService.updatePaymentMethod(id, paymentMethod);
         if (updateOrderPaymentMethod) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -96,5 +103,4 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }

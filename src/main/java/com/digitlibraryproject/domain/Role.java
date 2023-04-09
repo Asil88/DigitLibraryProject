@@ -2,10 +2,12 @@ package com.digitlibraryproject.domain;
 
 import lombok.Data;
 
+
 import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "roles")
 public class Role {
 
     @Id
@@ -17,5 +19,12 @@ public class Role {
     @Column(name = "role")
     private String role;
 
+    public Role() {
+    }
 
+    public Role(int id, int userId, String role) {
+        this.id = id;
+        this.userId = userId;
+        this.role = role;
+    }
 }

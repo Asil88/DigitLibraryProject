@@ -1,0 +1,103 @@
+create table public.users
+(
+    id           bigserial
+        constraint "User_pkey"
+            primary key,
+    login        varchar not null
+        constraint "User_login_key"
+            unique,
+    password     varchar not null,
+    name         varchar,
+    email        varchar
+        unique,
+    phone_number varchar
+        unique
+);
+
+alter table public.users
+    owner to postgres;
+
+create table public.authors
+(
+    id          bigserial
+        primary key,
+    name        varchar,
+    surname     varchar,
+    biography   varchar,
+    description varchar
+);
+
+alter table public.authors
+    owner to postgres;
+
+create table public.books
+(
+    id           bigserial
+        primary key,
+    title        varchar not null,
+    price        double precision,
+    genre        varchar,
+    series       varchar,
+    annotation   varchar,
+    availability varchar not null,
+    author_id    integer
+        constraint books_authors_id_fk
+            references public.authors
+            on update cascade on delete cascade,
+    file_name    varchar
+);
+
+alter table public.books
+    owner to postgres;
+
+create table public.orders
+(
+    id             bigserial
+        primary key,
+    status         varchar default 'EXPECTED'::character varying not null,
+    date_created   timestamp,
+    payment_method varchar default 'Naturoi'::character varying  not null,
+    user_id        integer                                       not null
+        constraint orders_users_id_fk
+            references public.users
+            on update cascade on delete cascade,
+    book_id        integer
+        constraint orders_books_id_fk
+            references public.books
+            on update cascade on delete cascade
+);
+
+alter table public.orders
+    owner to postgres;
+
+create table public.articles
+(
+    id           bigserial
+        primary key,
+    title        varchar,
+    date_created timestamp,
+    text         varchar,
+    author_id    integer
+        constraint articles_authors_id_fk
+            references public.authors
+            on update cascade on delete cascade
+);
+
+alter table public.articles
+    owner to postgres;
+
+create table public.roles
+(
+    id      bigserial
+        primary key,
+    user_id integer not null
+        unique
+        constraint roles_users_id_fk
+            references public.users
+            on update cascade on delete cascade,
+    role    varchar default 'USER'::character varying
+);
+
+alter table public.roles
+    owner to postgres;
+

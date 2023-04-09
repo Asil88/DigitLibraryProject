@@ -26,10 +26,12 @@ public class SecurityConfiguration {
             "/v2/api-docs",
             "/webjars/**"
     };
+
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().antMatchers(AUTH_WHITELIST);
     }
+
     @Autowired
     public SecurityConfiguration(CustomerUserDetailsService customerUserDetailsService) {
         this.customerUserDetailsService = customerUserDetailsService;
@@ -43,8 +45,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration","/swagger-ui/index.html").permitAll()
-                .antMatchers("/user/**","/order/**","/book/**","/author/**","/article/**").hasAnyRole("USER", "ADMIN" ,"SUBSCRIBER")
+                .antMatchers("/registration", "/swagger-ui/index.html").permitAll()
+                .antMatchers("/user/**", "/order/**", "/book/**", "/author/**", "/article/**").hasAnyRole("USER", "ADMIN", "SUBSCRIBER")
                 //.antMatchers("/book/download").hasRole("SUBSCRIBER")
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .anyRequest().authenticated()

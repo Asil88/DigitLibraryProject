@@ -11,7 +11,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,7 +60,7 @@ public class UserController {
     }
 
     @PutMapping("/updatePassword/{id}")
-    public ResponseEntity<HttpStatus> updateUserPassword(@PathVariable Integer id,@Valid @RequestBody String newPassword) {
+    public ResponseEntity<HttpStatus> updateUserPassword(@PathVariable Integer id, @Valid @RequestBody String newPassword) {
         boolean isUpdated = userService.updatePassword(id, newPassword);
         if (isUpdated) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -63,7 +70,7 @@ public class UserController {
     }
 
     @PutMapping("/updateLogin/{id}")
-    public ResponseEntity<HttpStatus> updateUserLogin(@PathVariable Integer id,@Valid @RequestBody String newLogin) {
+    public ResponseEntity<HttpStatus> updateUserLogin(@PathVariable Integer id, @Valid @RequestBody String newLogin) {
         boolean isUpdated = userService.updateLogin(id, newLogin);
         if (isUpdated) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -81,5 +88,4 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }

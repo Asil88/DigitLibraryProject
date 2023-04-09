@@ -1,5 +1,5 @@
 package com.digitlibraryproject.util;
 
 public enum StatusEnum {
-    EXPECTED,ACCEPTED,PROCESSED,FINISHED
+    EXPECTED, ACCEPTED, PROCESSED, FINISHED
 }

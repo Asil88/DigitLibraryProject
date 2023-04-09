@@ -43,5 +43,4 @@ public class SecurityController {
     public ResponseEntity<HttpResponse> updateUserToSubscriber(@PathVariable int id) {
         return new ResponseEntity<>(securityService.updateUserToSubscriber(id) ? HttpStatus.CREATED : HttpStatus.CONFLICT);
     }
-
 }

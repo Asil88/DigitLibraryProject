@@ -43,7 +43,7 @@ public class ArticleService {
     }
 
     public boolean deleteArticleById(Integer id) {
-        Optional<Article> optionalArticle =articleRepository.findById(id);
+        Optional<Article> optionalArticle = articleRepository.findById(id);
         try {
             if (optionalArticle.isPresent()) {
                 articleRepository.deleteById(id);
@@ -54,6 +54,4 @@ public class ArticleService {
         }
         return false;
     }
-
-
 }

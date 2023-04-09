@@ -11,8 +11,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT role FROM roles WHERE user_id=:id")
     String getRole(int id);
-
-
-
 }
 

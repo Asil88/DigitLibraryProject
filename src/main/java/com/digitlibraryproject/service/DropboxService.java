@@ -18,7 +18,7 @@ public class DropboxService {
     private final DbxClientV2 client;
 
     public DropboxService() {
-        String accessToken = "sl.BcEy40iR_q8KXSR-bTXkMAtE_uIV5alJOY6OkbLPjBSZIskw5huFbVpQDxhxJVOP6w-rWQWQFUfhuexyGsLKGgHnRSYnExALlDxQa43EC7G0DZWYyEQntF0rzWWXOEyktSGkYbL9NKmv";
+        String accessToken = "sl.BcIWOz8RUwgBkHaeB4LW8XNe-kZUN5gA56MW2sBTTCeZVErjOvSJVTg2pc_ywqDavufbz5biRbE05KJhAoUdJehUnWfiG-oKIAGLsEUjGuE8zZilCn0lQWDqoSsBzBC0Oiigr13sjt8I";
         DbxRequestConfig config = DbxRequestConfig.newBuilder("DigitLibrary").build();
         client = new DbxClientV2(config, accessToken);
     }
@@ -44,7 +44,6 @@ public class DropboxService {
             return outputStream.toByteArray();
         }
     }
-
 }
 
 

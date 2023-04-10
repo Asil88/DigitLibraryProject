@@ -46,8 +46,35 @@ public class SecurityConfiguration {
         return http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/registration", "/swagger-ui/index.html").permitAll()
-                .antMatchers("/user/**", "/order/**", "/book/**", "/author/**", "/article/**").hasAnyRole("USER", "ADMIN", "SUBSCRIBER")
-                //.antMatchers("/book/download").hasRole("SUBSCRIBER")
+
+                .antMatchers("/registration/**").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.DELETE,("/user/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,("/user/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.GET,("/user/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+
+                .antMatchers(HttpMethod.DELETE,("/order/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,("/order/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.PUT,("/order/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET,("/order/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+
+                .antMatchers(HttpMethod.DELETE,("/author/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,("/author/**")).hasAnyRole("ADMIN","SUBSCRIBER","USER")
+                .antMatchers(HttpMethod.PUT,("/author/**")).hasAnyRole("ADMIN","SUBSCRIBER","USER")
+                .antMatchers(HttpMethod.GET,("/author/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+
+                .antMatchers(HttpMethod.DELETE,("/article/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,("/article/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.PUT,("/article/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.GET,("/article/**")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+
+                .antMatchers(HttpMethod.GET,("/book/{id}")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.GET,("/book/findAll")).hasAnyRole("USER","ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.GET,("/book/download")).hasAnyRole("ADMIN","SUBSCRIBER")
+                .antMatchers(HttpMethod.POST,("/book/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,("/book/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,("/book/**")).hasAnyRole("ADMIN")
+
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

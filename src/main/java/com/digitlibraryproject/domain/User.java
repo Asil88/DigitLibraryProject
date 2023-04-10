@@ -27,7 +27,7 @@ public class User {
     private int id;
 
     @NotBlank(message = "Login is mandatory")
-    @Size(min = 5, max = 30, message = "Login must be between 6 and 30 characters")
+    @Size(min = 5, max = 30, message = "Login must be between 5 and 30 characters")
     @Column(name = "login")
     private String login;
 

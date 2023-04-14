@@ -58,7 +58,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testFindAllOrders() throws Exception {
         when(orderService.findAllOrders()).thenReturn(Optional.of(orderList));
         mockMvc.perform(get("/order/findAll"))
@@ -71,7 +71,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testGetOrderById() throws Exception {
         when(orderService.getOrderById(order.getId())).thenReturn(Optional.of(order));
         mockMvc.perform(get("/order/{id}", order.getId()))
@@ -85,7 +85,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testCreateOrder() throws Exception {
         OrderRequest newOrder = new OrderRequest(FINISHED, VISA, 1, 1);
         doNothing().when(orderService).createOrder(newOrder);
@@ -97,7 +97,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateOrderById() throws Exception {
         doNothing().when(orderService).updateOrderById(order);
         mockMvc.perform(put("/order/update")
@@ -107,7 +107,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testDeleteOrderById() throws Exception {
         int id = 1;
         when(orderService.deleteOrderById(id)).thenReturn(true);

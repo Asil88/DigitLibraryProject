@@ -56,7 +56,7 @@ public class BookControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testFindAllBooks() throws Exception {
         when(bookService.findAllBooks()).thenReturn(Optional.of(bookList));
         mockMvc.perform(get("/book/findAll"))
@@ -73,7 +73,7 @@ public class BookControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testGetBookById() throws Exception {
         when(bookService.getBookById(book.getId())).thenReturn(Optional.of(book));
         mockMvc.perform(get("/book/{id}", book.getId()))
@@ -92,7 +92,7 @@ public class BookControllerTest {
 
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testCreateBook() throws Exception {
         BookRequest newBook = new BookRequest("kniga1", 100.1, Drama, "series", "ne vazno", InStock, 1, "text.txt");
         doNothing().when(bookService).createBook(newBook);
@@ -104,7 +104,7 @@ public class BookControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateBookById() throws Exception {
         doNothing().when(bookService).updateBookById(book);
         mockMvc.perform(put("/book/update")
@@ -114,7 +114,7 @@ public class BookControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testDeleteAuthorById() throws Exception {
         int id = 1;
         when(bookService.deleteBookById(id)).thenReturn(true);

@@ -51,7 +51,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testFindAllAuthors() throws Exception {
         when(authorService.findAllAuthors()).thenReturn(Optional.of(authorList));
         mockMvc.perform(get("/author/findAll"))
@@ -64,7 +64,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testGetAuthorById() throws Exception {
         when(authorService.getAuthorById(author.getId())).thenReturn(Optional.of(author));
         mockMvc.perform(get("/author/{id}", author.getId()))
@@ -79,7 +79,7 @@ public class AuthorControllerTest {
 
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testCreateArticle() throws Exception {
         AuthorRequest newAuthor = new AuthorRequest("Anto", "Li", "bi", "description");
         doNothing().when(authorService).createAuthor(newAuthor);
@@ -91,7 +91,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateAuthorById() throws Exception {
         doNothing().when(authorService).updateAuthorById(author);
 
@@ -102,7 +102,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testDeleteAuthorById() throws Exception {
         int id = 1;
         when(authorService.deleteAuthorById(id)).thenReturn(true);

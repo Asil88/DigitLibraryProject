@@ -54,7 +54,7 @@ public class ArticleControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testFindAllArticles() throws Exception {
         when(articleService.findAllArticles()).thenReturn(Optional.of(articleList));
         mockMvc.perform(get("/article/findAll"))
@@ -65,7 +65,7 @@ public class ArticleControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testGetArticleById() throws Exception {
         when(articleService.getArticleById(article.getId())).thenReturn(Optional.of(article));
         mockMvc.perform(get("/article/{id}", article.getId()))
@@ -78,7 +78,7 @@ public class ArticleControllerTest {
 
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testCreateArticle() throws Exception {
         ArticleRequest newArticle = new ArticleRequest("New title", "Text", 1);
         doNothing().when(articleService).createArticle(newArticle);
@@ -90,7 +90,7 @@ public class ArticleControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateArticleById() throws Exception {
         doNothing().when(articleService).updateArticleById(article);
 
@@ -101,7 +101,7 @@ public class ArticleControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testDeleteArticleById() throws Exception {
         int id = 1;
         when(articleService.deleteArticleById(id)).thenReturn(true);

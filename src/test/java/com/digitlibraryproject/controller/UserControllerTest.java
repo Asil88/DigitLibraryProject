@@ -49,7 +49,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testFindAllUsers() throws Exception {
         when(userService.findAllUsers()).thenReturn(Optional.of(userList));
 
@@ -63,7 +63,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testGetUserById() throws Exception {
         when(userService.getUserById(user.getId())).thenReturn(Optional.of(user));
 
@@ -78,7 +78,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateUserById() throws Exception {
         doNothing().when(userService).updateUserById(user);
 
@@ -89,7 +89,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateUserPassword() throws Exception {
         int id = 1;
         String newPassword = "newpassword";
@@ -102,7 +102,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testUpdateUserLogin() throws Exception {
         int id = 1;
         String newLogin = "newlogin";
@@ -115,7 +115,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "login", password = "password")
+    @WithMockUser(username = "login", password = "password", roles = "ADMIN")
     void testDeleteUserById() throws Exception {
         int id = 1;
         when(userService.deleteUserById(id)).thenReturn(true);

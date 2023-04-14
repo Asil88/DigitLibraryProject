@@ -31,31 +31,33 @@ public class LogAspect {
     public void applicationPackagePointcut() {
     }
 
-    @AfterThrowing(pointcut = "applicationPackagePointcut() && springBeanPointcut()",throwing = "e")
+    @AfterThrowing(pointcut = "applicationPackagePointcut() && springBeanPointcut()", throwing = "e")
     public void logAfterThrowingMethod(Throwable e) {
-        log.info("ОШИБКА 0_0,А КАКАЯ? А ВОТ ТАКАЯ: " + e);
+
     }
+
     @AfterThrowing(pointcut = "applicationPackagePointcut() && springBeanPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        log.info("ОШИБКА 0_0,А ГДЕ? А ВОТ ГДЕ: {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
+        log.info("Error: " + e);
+        log.info("Error: {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), e.getCause() != null ? e.getCause() : "NULL");
     }
 
     @Around("applicationPackagePointcut() && springBeanPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         if (log.isDebugEnabled()) {
-            log.info("Входит: {}.{}() с аргументами [s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
+            log.info("Enters: {}.{}() with arguments [s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
         }
         try {
             Object result = joinPoint.proceed();
             if (log.isDebugEnabled()) {
-                log.info("Выходит: {}.{}() с результатом = {}", joinPoint.getSignature().getDeclaringTypeName(),
+                log.info("Output: {}.{}() with result = {}", joinPoint.getSignature().getDeclaringTypeName(),
                         joinPoint.getSignature().getName(), result);
             }
             return result;
         } catch (IllegalArgumentException e) {
-            log.error("Неправильный аргумент: {} в {}.{}()", Arrays.toString(joinPoint.getArgs()),
+            log.error("Wrong argument: {} в {}.{}()", Arrays.toString(joinPoint.getArgs()),
                     joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
             throw e;
         }

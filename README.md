@@ -1,55 +1,65 @@
 
 # DigitLibrary  
-Выпускной проект для TeachMeSkills  
+the graduation project for TeachMeSkills    
 
 Descriptions:   
 
-Сервис представляет собой онлайн-библиотеку. Он позволяет загружать и скачивать книги, публиковать и читать статьи.  
-Также есть возможность подписки.  
+DigitLibrary is an online library service that allows users to upload and download books, publish and read articles,  
+and subscribe to the service.  
 
 
 # Tests  
-Перед началом использования приложения рекомендуется запустить тесты для проверки его функциональности.  
-Это можно сделать, выбрав папку StockMarket -> src -> test -> java и нажав Ctrl + Shift + F10, или щелкнув  
-правой кнопкой мыши и выбрав "Run 'All Tests'" (Запустить все тесты).  
+Before using the application, it is recommended to run tests to check its functionality. This can be done by selecting  
+the StockMarket -> src -> test -> java folder and pressing Ctrl + Shift + F10,   
+or by right-clicking and selecting "Run 'All Tests'".  
 
 
 # Database  
-В этом проекте в качестве основной базы данных используется PostgresSQL.
-Чтобы подключиться к базе данных, необходимо установить PostgresSQL и настроить подключение в файле application.properties:
+DigitLibrary, the graduation project for TeachMeSkills
+
+Description:
+DigitLibrary is an online library service that allows users to upload and download books, publish and read articles, and subscribe to the service.
+
+Tests:
+Before using the application, it is recommended to run tests to check its functionality. This can be done by selecting the StockMarket -> src -> test -> java folder and pressing Ctrl + Shift + F10, or by right-clicking and selecting "Run 'All Tests'".
+
+Database:
+The main database used in this project is PostgresSQL. To connect to the database, you need to install PostgresSQL  
+and configure the connection in the application.properties file:  
 <pre>
 spring.datasource.username=postgres
 spring.datasource.password=root
 spring.datasource.url=jdbc:postgresql://localhost:5432/digit_library_project_db
 spring.datasource.driver-class-name=org.postgresql.Driver
 </pre>
-Она содержит 6 таблиц.  
-users - хранит всю информацию о пользователях, включая логин, пароль, имя, почту, номер телефона.  
-roles - хранит роль пользователя. В приложении существуют три возможные роли: USER, ADMIN, ROLE.  
-books - хранит информацию о книгах. Хранит id автора и имя файла для загрузки в облако.  
-articles - хранит дату создания, текст статьи и id автора.  
-orders - хранит статус заказа, способ оплаты, дату создания, id пользователя и id книги.  
+The database contains 6 tables:  
+users - stores all user information, including login, password, name, email, and phone number.  
+roles - stores user roles. There are three possible roles in the application: USER, ADMIN, SUBSCRIBER.  
+books - stores information about books, including the author's ID and the file name for cloud storage.  
+articles - stores the creation date, text of the article, and author ID.  
+orders - stores the order status, payment method, creation date, user ID, and book ID.  
 
-Приложение использует миграцию базы данных Flyway. В папке src/main/resources/db/migration вы можете найти  
-файл V1__create_tables.sql, в котором можно написать скрипты создания базы данных, а также файл  
-V2__insert_tables.sql для их инициализации.
+The application uses Flyway database migration. You can find the V1__create_tables.sql file in the   
+src/main/resources/db/migration folder, where you can write scripts to create the database, as well  
+as the V2__insert_tables.sql file for their initialization.
 
 
 # Registration  
-Безопасность этого приложения обеспечивается за счет Spring Basic Security.
-Чтобы зарегистрироваться, необходимо передать формат json:
-(метод POST: {"email": "test99@gmail.com","login": "user","name": "Alex","password": "password","phoneNumber": "1234567"})
-на "http://localhost:8080/registration", после чего пользователь будет создан и помещен в базу данных с ROLE_USER и зашифрованным паролем.
-Пароль можно изменить, отправив запрос POST на "http://localhost:8080/user/updatePassword/{id}", передав новый пароль в формате json.
-Логин также можно изменить, отправив запрос POST на "http://localhost:8080/user/updateLogin
+The security of this application is ensured by Spring Basic Security. To register, you need to pass the json format:  
+(POST method: {"email": "test99@gmail.com","login": "user","name": "Alex","password": "password","phoneNumber": "1234567"})  
+to "http://localhost:8080/registration", after which the user will be created and added to the database with ROLE USER   
+and an encrypted password. The password can be changed by sending a POST request   
+to "http://localhost:8080/user/updatePassword/{id}" and passing the new password in json format.   
+The login can also be changed by sending a POST request to "http://localhost:8080/user/updateLogin.  
 
 
 # Additionally:  
-В проекте подключен Docker и настроен docker-compose. 
-Volume этого приложения можно загрузить командой : docker pull asil88/digitlibrary:v9  
+Docker is connected in the project, and docker-compose is configured. You can download the images of this application  
+with the command: docker pull asil88/digitlibrary:v9. The application also uses Dropbox cloud storage, access to which  
+can be obtained through the token provided during application registration on the site.   
+The token can be specified in the DropBoxService.
 
-В приложении так же используется облачное хранилище DropBox,доступ к которому можно получить по токену,который  
-предоставляется при регистрации приложения на сайте,указать токен можно в  DropBoxService.  
+
 
 # User Endpoints:
 
